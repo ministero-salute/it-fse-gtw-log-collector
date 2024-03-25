@@ -9,10 +9,7 @@ import lombok.Data;
 @Data
 public class LogCfg {
 
-    @Value("${log.ingestion.url}")
-    private String url;
-    
     @Value("${log.expire.date.day}")
-	private Integer expiringDateDAy;
-    
+    private Integer expiringDateDAy;
+
 }

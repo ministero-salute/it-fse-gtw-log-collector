@@ -3,30 +3,24 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
-import java.util.stream.Collectors;
 
-import it.finanze.sanita.fse2.ms.gtw.logcollector.enums.ProcessedStatusEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.config.LogCfg;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.EsitoDTO;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.IssuerDTO;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.LocalityDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.ResultDto;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.SubjApplicationDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.enums.ProcessedStatusEnum;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.BusinessException;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollectorBase;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollectorControlETY;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollectorKpiETY;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.mongo.IlogCollectorRepo;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.service.ILogCollectorSrv;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.DateUtility;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.JsonUtility;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,10 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LogCollectorSrv implements ILogCollectorSrv {
 
     @Autowired
-    private IlogCollectorRepo ilogCollectorRepo;
-
-    @Autowired
-    private LogCfg logCfg;
+    private IlogCollectorRepo logCollectorRepo;
 
     @Override
     public void saveLogEvent(final String json) {
@@ -55,8 +46,8 @@ public class LogCollectorSrv implements ILogCollectorSrv {
             }
 
             b.setProcessed(ProcessedStatusEnum.UNPROCESSED.getCode());
-            ilogCollectorRepo.save(b);
-            log.info("Salvataggio su mongo effettuato");
+            logCollectorRepo.save(b);
+            log.debug("Salvataggio su mongo effettuato");
         } catch (Exception ex) {
             log.error("Error while save event : ", ex);
             throw new BusinessException("Error while save event : ", ex);
@@ -123,5 +114,4 @@ public class LogCollectorSrv implements ILogCollectorSrv {
 
         return doc;
     }
-
 }

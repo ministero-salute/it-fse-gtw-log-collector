@@ -71,11 +71,6 @@ public class Constants {
 	@NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Mongo {
         public static class Query {
-            private Query() {
-
-                final String UNKNOWN_WORKFLOW_ID = "UNKNOWN_WORKFLOW_ID";
-
-            }
 
             public static final String UNKNOWN_WORKFLOW_ID = "UNKNOWN_WORKFLOW_ID";
             public static final String REGION = "op_issuer.region";
