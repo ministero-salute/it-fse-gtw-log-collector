@@ -4,10 +4,6 @@ import java.util.Base64;
 
 import org.apache.commons.codec.binary.Hex;
 
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
 public final class StringUtility {
 
     /**
@@ -20,8 +16,8 @@ public final class StringUtility {
     /**
      * Encode in Base64 the byte array passed as parameter.
      *
-     * @param input	The byte array to encode.
-     * @return		The encoded byte array to String.
+     * @param input The byte array to encode.
+     * @return The encoded byte array to String.
      */
     public static String encodeBase64(final byte[] input) {
         return Base64.getEncoder().encodeToString(input);
@@ -30,8 +26,8 @@ public final class StringUtility {
     /**
      * Encodes the byte array passed as parameter in hexadecimal.
      *
-     * @param input	The byte array to encode.
-     * @return		The encoded byte array to String.
+     * @param input The byte array to encode.
+     * @return The encoded byte array to String.
      */
     public static String encodeHex(final byte[] input) {
         return Hex.encodeHexString(input);
@@ -40,8 +36,8 @@ public final class StringUtility {
     /**
      * Returns {@code true} if the String passed as parameter is null or empty.
      *
-     * @param str	String to validate.
-     * @return		{@code true} if the String passed as parameter is null or empty.
+     * @param str String to validate.
+     * @return {@code true} if the String passed as parameter is null or empty.
      */
     public static boolean isNullOrEmpty(final String str) {
         return str == null || str.isEmpty();

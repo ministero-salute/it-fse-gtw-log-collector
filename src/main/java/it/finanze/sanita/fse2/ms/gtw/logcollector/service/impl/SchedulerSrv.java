@@ -49,7 +49,7 @@ public class SchedulerSrv implements ISchedulerSrv {
         long processedLog = 0;
         int pageSize = configSRV.getPageSize();
 
-        // Se il numero di log da processore ├¿ superiore alla PAGE_SIZE
+        // Se il numero di log da processare è superiore alla PAGE_SIZE
         if (totalLog >= pageSize) {
             // Aggiorno tutti i log da "UNPROCESSED" -> "PROCESSING"
             logCollectorRepo.updateAllUnprocessed(clazz);

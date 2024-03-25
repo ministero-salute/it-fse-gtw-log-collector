@@ -31,7 +31,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public long countUnprocessedLogs(Class clazz) {
+	public long countUnprocessedLogs(Class<? extends LogCollectorBase> clazz) {
 		Query query = new Query(
 				Criteria.where(Constants.Mongo.Fields.PROCESSED).is(ProcessedStatusEnum.UNPROCESSED.getCode())
 						.andOperator(Criteria.where(Constants.Mongo.Fields.WORKFLOW_INSTANCE_ID)
@@ -50,7 +50,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public int update(List<String> objectIds, Class clazz) {
+	public int update(List<String> objectIds, Class<? extends LogCollectorBase> clazz) {
 		List<ObjectId> objectIdList = new ArrayList<>();
 		for (String id : objectIds) {
 			objectIdList.add(new ObjectId(id));
