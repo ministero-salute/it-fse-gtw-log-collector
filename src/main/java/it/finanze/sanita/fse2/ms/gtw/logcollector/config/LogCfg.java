@@ -10,6 +10,6 @@ import lombok.Data;
 public class LogCfg {
 
     @Value("${log.expire.date.day}")
-    private Integer expiringDateDAy;
+    private Integer expiringDateDay;
 
 }

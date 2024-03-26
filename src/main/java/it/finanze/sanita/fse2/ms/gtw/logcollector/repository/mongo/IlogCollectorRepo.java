@@ -6,13 +6,13 @@ import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollector
 
 public interface IlogCollectorRepo {
 
-     long countUnprocessedLogs(Class<? extends LogCollectorBase> clazz);
-
-     List<? extends LogCollectorBase> findUnprocessedLog(Class<? extends LogCollectorBase> clazz);
-
      void save(LogCollectorBase ety);
 
-     int update(List<String> objectIds, Class<? extends LogCollectorBase> clazz);
+     <T extends LogCollectorBase> long countUnprocessedLogs(Class<T> clazz);
 
-     int updateAllUnprocessed(Class<? extends LogCollectorBase> clazz);
+     <T extends LogCollectorBase> List<T> findUnprocessedLog(Class<T> clazz);
+
+     <T extends LogCollectorBase> int update(List<String> objectIds, Class<T> clazz);
+
+     <T extends LogCollectorBase> int updateAllUnprocessed(Class<T> clazz);
 }

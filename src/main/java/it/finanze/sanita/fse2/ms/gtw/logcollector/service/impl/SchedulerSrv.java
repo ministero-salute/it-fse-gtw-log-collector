@@ -40,7 +40,7 @@ public class SchedulerSrv implements ISchedulerSrv {
     private IKafkaSRV kafkaSRV;
 
     @Override
-    public ResultDto scheduleLog(Class<? extends LogCollectorBase> clazz) {
+    public <T extends LogCollectorBase> ResultDto scheduleLog(Class<T> clazz) {
         ResultDto resultDto = new ResultDto();
         String logType = clazz.equals(LogCollectorControlETY.class) ? Constants.Mongo.Fields.LOG_TYPE_CONTROL
                 : Constants.Mongo.Fields.LOG_TYPE_KPI;
@@ -59,8 +59,8 @@ public class SchedulerSrv implements ISchedulerSrv {
             processedLog = totalLog;
         } else if (totalLog != 0) {
             // Se ci sono log da inviare ma non sono abbastanza per la PAGE_SIZE
-            List<? extends LogCollectorBase> logs = logCollectorRepo.findUnprocessedLog(clazz);
-            Date oldestLog = DateUtility.addDay(logs.get(0).getTimestampStart(), logCfg.getExpiringDateDAy());
+            List<T> logs = logCollectorRepo.findUnprocessedLog(clazz);
+            Date oldestLog = DateUtility.addDay(logs.get(0).getTimestampStart(), logCfg.getExpiringDateDay());
             // Se ci sono dei log scaduti li invio ugualmente
             if (new Date().after(oldestLog)) {
                 List<String> objectId = logs.stream().map(log -> log.getId()).collect(Collectors.toList());

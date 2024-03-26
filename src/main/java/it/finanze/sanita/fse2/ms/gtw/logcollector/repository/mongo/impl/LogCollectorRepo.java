@@ -31,7 +31,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public long countUnprocessedLogs(Class<? extends LogCollectorBase> clazz) {
+	public <T extends LogCollectorBase> long countUnprocessedLogs(Class<T> clazz) {
 		Query query = new Query(
 				Criteria.where(Constants.Mongo.Fields.PROCESSED).is(ProcessedStatusEnum.UNPROCESSED.getCode())
 						.andOperator(Criteria.where(Constants.Mongo.Fields.WORKFLOW_INSTANCE_ID)
@@ -40,7 +40,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public List<? extends LogCollectorBase> findUnprocessedLog(Class<? extends LogCollectorBase> clazz) {
+	public <T extends LogCollectorBase> List<T> findUnprocessedLog(Class<T> clazz) {
 		Query query = new Query(
 				Criteria.where(Constants.Mongo.Fields.PROCESSED).is(ProcessedStatusEnum.UNPROCESSED.getCode())
 						.andOperator(Criteria.where(Constants.Mongo.Fields.WORKFLOW_INSTANCE_ID)
@@ -50,7 +50,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public int update(List<String> objectIds, Class<? extends LogCollectorBase> clazz) {
+	public <T extends LogCollectorBase> int update(List<String> objectIds, Class<T> clazz) {
 		List<ObjectId> objectIdList = new ArrayList<>();
 		for (String id : objectIds) {
 			objectIdList.add(new ObjectId(id));
@@ -63,7 +63,7 @@ public class LogCollectorRepo implements IlogCollectorRepo {
 	}
 
 	@Override
-	public int updateAllUnprocessed(Class<? extends LogCollectorBase> clazz) {
+	public <T extends LogCollectorBase> int updateAllUnprocessed(Class<T> clazz) {
 		// Si aggiornano tutti i log che sono segnati come "UNPROCESSED"
 		Query query = new Query(
 				Criteria.where(Constants.Mongo.Fields.PROCESSED).is(ProcessedStatusEnum.UNPROCESSED.getCode()));

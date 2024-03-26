@@ -5,6 +5,6 @@ import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollector
 
 public interface ISchedulerSrv {
 
-    ResultDto scheduleLog(Class<? extends LogCollectorBase> clazz);
+    <T extends LogCollectorBase> ResultDto scheduleLog(Class<T> clazz);
 
 }
