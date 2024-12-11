@@ -161,7 +161,6 @@
 			<artifactId>shedlock-provider-mongo</artifactId>
 			<version>4.42.0</version>
 		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/com.microsoft.azure/msal4j -->
 		<dependency>
 		    <groupId>com.microsoft.azure</groupId>

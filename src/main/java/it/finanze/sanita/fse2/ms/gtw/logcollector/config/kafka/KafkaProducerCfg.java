@@ -4,6 +4,7 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.config.kafka;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.kafka.oauth2.CustomAuthenticateCallbackHandler;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.StringUtility;
 import lombok.extern.slf4j.Slf4j;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.StringUtility;
 
 /**
  *	Kafka producer configuration.
@@ -75,7 +77,6 @@ public class KafkaProducerCfg{
 			props.put("kafka.oauth.appId", kafkaPropCFG.getAppId());	
 			props.put("kafka.oauth.pwd", kafkaPropCFG.getPwd());	
 		}
-
 
 		return props;
 	}

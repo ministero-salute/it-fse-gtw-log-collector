@@ -83,7 +83,6 @@ public class KafkaConsumerCfg {
 			props.put("kafka.oauth.appId", kafkaPropCFG.getAppId());	
 			props.put("kafka.oauth.pwd", kafkaPropCFG.getPwd());	
 		}
-
 		return props;
 	}
 

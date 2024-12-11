@@ -55,7 +55,6 @@ public class KafkaPropertiesCfg {
 	@Value("${kafka.properties.ssl.truststore.password}")
 	private transient char[] trustorePassword;
 	 
-	
 	@Value("${kafka.oauth.tenantId}")
 	private String tenantId;
 
@@ -65,5 +64,4 @@ public class KafkaPropertiesCfg {
 	@Value("${kafka.oauth.pwd}")
 	private String pwd;
 
-	
 }
