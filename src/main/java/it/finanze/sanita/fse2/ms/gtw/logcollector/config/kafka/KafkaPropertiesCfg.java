@@ -61,8 +61,8 @@ public class KafkaPropertiesCfg {
 	@Value("${kafka.oauth.appId}")
 	private String appId;
 	
-	@Value("${kafka.oauth.pfxName}")
-	private String pfxName;
+	@Value("${kafka.oauth.pfxPathName}")
+	private String pfxPathName;
 
 	@Value("${kafka.oauth.pwd}")
 	private String pwd;
