@@ -3,12 +3,10 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.service.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.LogCfg;
@@ -21,13 +19,13 @@ import it.finanze.sanita.fse2.ms.gtw.logcollector.service.IConfigSRV;
 @ActiveProfiles(Constants.Profile.TEST)
 class LogCollectorSrvTest {
 
-    @MockBean
+    @MockitoBean
     private LogCollectorRepo logCollectorRepo;
 
-    @MockBean
+    @MockitoBean
     private LogCfg logCfg;
 
-    @MockBean
+    @MockitoBean
     private IConfigSRV configSRV;
 
     @Autowired

@@ -117,5 +117,10 @@ public class Constants {
 
         }
     }
+	
+	@NoArgsConstructor(access = AccessLevel.PRIVATE)
+	public static final class Properties {
+		public static final String MS_NAME = "gtw-log-collector";
+	}
 
 }

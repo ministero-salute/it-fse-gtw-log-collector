@@ -14,8 +14,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.LogCfg;
@@ -36,19 +36,19 @@ class SchedulerSrvTest {
     @Autowired
     private ISchedulerSrv schedulerSrv;
 
-    @MockBean
+    @MockitoBean
     private IlogCollectorRepo logCollectorRepo;
 
-    @MockBean
+    @MockitoBean
     private IConfigSRV configSRV;
 
-    @MockBean
+    @MockitoBean
     private KafkaTopicCfg kafkaTopicCfg;
 
-    @MockBean
+    @MockitoBean
     private IKafkaSRV kafkaSRV;
 
-    @MockBean
+    @MockitoBean
     private LogCfg logCfg;
 
     @ParameterizedTest

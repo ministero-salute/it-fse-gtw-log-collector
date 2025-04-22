@@ -1,4 +1,4 @@
-package it.finanze.sanita.fse2.ms.gtw.logcollector.client;
+package it.finanze.sanita.fse2.ms.gtw.logcollector.client.impl;
 
 
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import it.finanze.sanita.fse2.ms.gtw.logcollector.client.IConfigClient;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.client.routes.ConfigClientRoutes;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.config.ConfigItemDTO;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.enums.ConfigItemTypeEnum;

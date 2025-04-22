@@ -1,9 +1,9 @@
 package it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response;
 
-import lombok.extern.java.Log;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ErrorResponseDTOTest {
 

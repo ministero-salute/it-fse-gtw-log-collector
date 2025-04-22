@@ -1,21 +1,7 @@
 package it.finanze.sanita.fse2.ms.gtw.logcollector.service.impl;
 
-import com.google.gson.Gson;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.config.kafka.KafkaTopicCfg;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.IssuerDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.LocalityDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.SubjApplicationDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.*;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.service.IKafkaSRV;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.kafka.test.context.EmbeddedKafka;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.test.context.ActiveProfiles;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,13 +9,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+
+import com.google.gson.Gson;
+
+import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.config.kafka.KafkaTopicCfg;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.IssuerDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.LocalityDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.SubjApplicationDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollectorControlETY;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.service.IKafkaSRV;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(Constants.Profile.TEST)
 @EmbeddedKafka
 class KafkaSrvTest {
 
-    @SpyBean
+    @MockitoSpyBean
     private IKafkaSRV kafkaSRV;
 
     @Autowired
@@ -39,10 +42,6 @@ class KafkaSrvTest {
     void InComingControllLogs() {
 
         String logTopic = kafkaTopicCFG.getNotifierTopic();
-
-        Map<String, Object> map = new HashMap<>();
-        MessageHeaders headers = new MessageHeaders(map);
-
 
         LogCollectorControlETY logOkExample = new LogCollectorControlETY();
         IssuerDTO opIssuer = new IssuerDTO();

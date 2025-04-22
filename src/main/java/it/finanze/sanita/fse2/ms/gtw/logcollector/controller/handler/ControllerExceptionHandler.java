@@ -1,12 +1,7 @@
 package it.finanze.sanita.fse2.ms.gtw.logcollector.controller.handler;
 
-import brave.Tracer;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.client.exceptions.ServerResponseException;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response.ErrorResponseDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response.LogTraceInfoDTO;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.ConnectionRefusedException;
-import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.ValidationException;
-import lombok.extern.slf4j.Slf4j;
+import static it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants.Properties.MS_NAME;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +11,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import io.opentelemetry.api.trace.SpanBuilder;
+import io.opentelemetry.api.trace.Tracer;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.client.exceptions.ServerResponseException;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response.ErrorResponseDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response.LogTraceInfoDTO;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.ConnectionRefusedException;
+import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.ValidationException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *	Exceptions Handler.
@@ -103,12 +107,16 @@ public class ControllerExceptionHandler  extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(out, headers, status);
     }
 
-    private LogTraceInfoDTO getLogTraceInfo() {
-        return new LogTraceInfoDTO(
-                tracer.currentSpan().context().spanIdString(),
-                tracer.currentSpan().context().traceIdString());
-    }
-
-
+    protected LogTraceInfoDTO getLogTraceInfo() {
+		LogTraceInfoDTO out = new LogTraceInfoDTO(null, null);
+		SpanBuilder spanbuilder = tracer.spanBuilder(MS_NAME);
+		
+		if (spanbuilder != null) {
+			out = new LogTraceInfoDTO(
+					spanbuilder.startSpan().getSpanContext().getSpanId(), 
+					spanbuilder.startSpan().getSpanContext().getTraceId());
+		}
+		return out;
+	}
 
 }

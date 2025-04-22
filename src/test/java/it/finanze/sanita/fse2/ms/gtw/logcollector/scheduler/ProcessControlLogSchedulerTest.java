@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity.LogCollectorControlETY;
@@ -21,7 +21,7 @@ class ProcessControlLogSchedulerTest {
     @Autowired
     private ProcessControlLogScheduler scheduler;
 
-    @MockBean
+    @MockitoBean
     private ISchedulerSrv service;
 
     @Test

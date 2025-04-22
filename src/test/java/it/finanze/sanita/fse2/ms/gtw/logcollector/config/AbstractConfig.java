@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.client.IConfigClient;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.config.ConfigItemDTO;
@@ -26,11 +26,11 @@ import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.ProfileUtility;
 
 public abstract class AbstractConfig {
 
-    @SpyBean
+    @MockitoSpyBean
     protected ConfigSRV config;
-    @MockBean
+    @MockitoBean
     private IConfigClient client;
-    @SpyBean
+    @MockitoSpyBean
     private ProfileUtility profiles;
 
     public abstract List<Pair<String, String>> defaults();

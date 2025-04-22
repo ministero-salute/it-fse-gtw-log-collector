@@ -1,8 +1,7 @@
 package it.finanze.sanita.fse2.ms.gtw.logcollector.dto.response;
 
-import javax.validation.constraints.Size;
-
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Getter

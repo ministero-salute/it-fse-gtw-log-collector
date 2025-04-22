@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,7 @@ import it.finanze.sanita.fse2.ms.gtw.logcollector.dto.config.ConfigItemDTO;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.enums.ConfigItemTypeEnum;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.service.IConfigSRV;
 import it.finanze.sanita.fse2.ms.gtw.logcollector.utility.ProfileUtility;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 
