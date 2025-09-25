@@ -15,6 +15,7 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.config.mongo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,15 +23,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
-
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClients;
 
 import net.javacrumbs.shedlock.core.LockProvider;
 import net.javacrumbs.shedlock.provider.mongo.MongoLockProvider;
@@ -44,18 +40,12 @@ public class MongoDatabaseCFG {
 
     final List<Converter<?, ?>> conversions = new ArrayList<>();
 
-    @Bean
-    public MongoDatabaseFactory mongoDatabaseFactory(final MongoPropertiesCFG mongoPropertiesCFG){
-    	  ConnectionString connectionString = new ConnectionString(mongoPropertiesCFG.getUri());
-          MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-              .applyConnectionString(connectionString)
-              .build();
-          return new SimpleMongoClientDatabaseFactory(MongoClients.create(mongoClientSettings), mongoPropertiesCFG.getSchemaName());
-    }
+   @Autowired
+   private MongoDatabaseFactory factory;
 
     @Bean
     @Primary
-    public MongoTemplate mongoTemplate(final MongoDatabaseFactory factory, final ApplicationContext appContext) {
+    public MongoTemplate mongoTemplate(final ApplicationContext appContext) {
         final MongoMappingContext mongoMappingContext = new MongoMappingContext();
         mongoMappingContext.setApplicationContext(appContext);
         MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(factory), mongoMappingContext);
