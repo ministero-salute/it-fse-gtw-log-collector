@@ -3,6 +3,7 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.repository.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.config.Constants;
@@ -12,6 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Document(collection = "#{@logCollectorControlBean}")
+@JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class LogCollectorControlETY extends LogCollectorBase {
@@ -47,5 +49,9 @@ public class LogCollectorControlETY extends LogCollectorBase {
     @Field(name = Constants.Mongo.Fields.TYPE_ID_EXTENSION)
     @JsonProperty(Constants.Mongo.Fields.TYPE_ID_EXTENSION)
     private String typeIdExtension;
+
+    @Field(name = Constants.Mongo.Fields.ID_DOCUMENTO)
+    @JsonProperty(Constants.Mongo.Fields.ID_DOCUMENTO)
+    private String idDocumento;
 
 }

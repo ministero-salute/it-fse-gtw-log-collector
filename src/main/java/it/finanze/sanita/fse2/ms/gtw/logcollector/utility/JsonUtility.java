@@ -2,6 +2,7 @@ package it.finanze.sanita.fse2.ms.gtw.logcollector.utility;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.finanze.sanita.fse2.ms.gtw.logcollector.exceptions.ValidationException;
@@ -14,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 public class JsonUtility {
 
 
-    private static ObjectMapper mapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    private static ObjectMapper mapper = new ObjectMapper()
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     /**
      * Methods that converts an Object to a JSON string.

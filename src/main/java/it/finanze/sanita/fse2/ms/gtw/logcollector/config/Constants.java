@@ -103,6 +103,7 @@ public class Constants {
             public static final String OP_SUBJ_APPLICATION_VERSION = "op_application_version";
             public static final String WORKFLOW_INSTANCE_ID = "workflow_instance_id";
             public static final String TYPE_ID_EXTENSION = "typeIdExtension";
+            public static final String ID_DOCUMENTO = "idDocumento";
             public static final String PROCESSED = "processed";
             public static final String ADMINISTRATIVE_REQUEST = "administrative_request";
             public static final String AUTHOR_INSTITUTION = "author_institution";
