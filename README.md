@@ -40,6 +40,41 @@
 
 ### Prerequisites
 
+Java 21 and Maven are required.
+
+## Isolation tests
+
+Run the opt-in isolation suite without MongoDB, Kafka, Azure credentials or a running
+configuration service:
+
+```sh
+mvn -PISOLATION clean test
+```
+
+The Maven profile selects only JUnit tests tagged `ISOLATION`; normal `mvn test`
+excludes that tag and retains the existing test suite. `@ActiveProfiles("ISOLATION")`
+on narrow Spring tests configures their context but does not select tests. These tests
+load only explicitly listed classes, not the full application, and mock external
+MongoDB, Kafka and HTTP boundaries. Pure utility/configuration tests use no Spring
+context. Scheduler entrypoints are invoked directly; no scheduled jobs or listeners
+are started.
+
+The suite checks log normalization and persistence, scheduling thresholds/expiry,
+Mongo query/update construction, Kafka delivery/error propagation and configuration,
+remote-configuration caching/fallback, HTTP responses/error advice, encodings and
+issuer/locality parsing. Failure cases verify causes, rejected inputs and absence of
+unwanted persistence/publication.
+
+JaCoCo HTML and XML reports are generated during `test` at
+`target/site/jacoco/index.html` and `target/site/jacoco/jacoco.xml`.
+
+Sonar analysis can be invoked separately with the configured Maven scanner, supplying
+the project's Sonar connection/key and credentials through your normal secure setup:
+
+```sh
+mvn -PISOLATION clean verify sonar:sonar
+```
+
 # Contributing
 Contributions are most welcome. Before proceeding, please read the [Code of Conduct](./CODE_OF_CONDUCT.md) for guidance on how to approach the community and create a positive environment. Additionally, please read our [CONTRIBUTING](./CONTRIBUTING.md) file, which contains guidance on ensuring a smooth contribution process.
 
